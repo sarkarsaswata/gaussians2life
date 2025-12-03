@@ -1,0 +1,108 @@
+[project]
+name = "gaussians2life"
+version = "0.1.0"
+description = "Text-Driven Animation of 3D Gaussian Splatting Scenes"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate==1.1.1",
+    "av==13.1.0",
+    "bitsandbytes==0.38.1",
+    "controlnet-aux==0.0.7",
+    "diff-gaussian-rasterization",
+    "diffusers==0.19.3",
+    "einops==0.8.0",
+    "envlight",
+    "gradio==4.11.0",
+    "huggingface-hub==0.24.7",
+    "imageio==2.36.0",
+    "imageio-ffmpeg==0.5.1",
+    "jaxtyping==0.2.34",
+    "kornia==0.7.4",
+    "libigl==2.5.1",
+    "lightning==2.0.0",
+    "lpips==0.1.4",
+    "markupsafe>=2.0.1",
+    "matplotlib==3.9.2",
+    "nerfacc",
+    "networkx>=3.4.2",
+    "ninja>=1.13.0",
+    "nvdiffrast",
+    "omegaconf==2.3.0",
+    "open-clip-torch==2.22.0",
+    "open3d==0.18.0",
+    "opencv-python==4.10.0.84",
+    "pip>=25.3",
+    "plyfile==1.1",
+    "pymcubes==0.1.6",
+    "pysdf==0.1.9",
+    "roma==1.5.1",
+    "safetensors==0.4.5",
+    "sentencepiece==0.2.0",
+    "setuptools>=80.9.0",
+    "simple-knn",
+    "taming-transformers-rom1504==0.0.6",
+    "tensorboard==2.18.0",
+    "timm==0.9.16",
+    "tinycudann",
+    "torch==2.0.1+cu118",
+    "torchmetrics==1.6.0",
+    "torchvision==0.15.2+cu118",
+    "transformers==4.46.2",
+    "trimesh==4.5.2",
+    "typeguard==2.13.3",
+    "wandb==0.18.7",
+    "xatlas==0.0.9",
+]
+
+[build-system]
+requires = ["setuptools", "wheel", "numpy", "torch"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+    "data",
+    "evaluation",
+    "geometry",
+    "guidance",
+    "renderer",
+    "systems",
+    "utils",
+]
+
+[tool.uv.sources]
+diff-gaussian-rasterization = { workspace = true }
+
+simple-knn = { workspace = true }
+nerfacc = { git = "https://github.com/KAIR-BAIR/nerfacc.git", rev = "v0.5.2" }
+tinycudann = { git = "https://github.com/NVlabs/tiny-cuda-nn.git", subdirectory = "bindings/torch" }
+envlight = { git = "https://github.com/ashawkey/envlight.git", rev = "05b5851e854429d72ecaf5b206ed64ce55fae677" }
+nvdiffrast = { git = "https://github.com/NVlabs/nvdiffrast.git", rev = "729261dc64c4241ea36efda84fbf532cc8b425b8" }
+
+[tool.uv.extra-build-dependencies]
+diff-gaussian-rasterization = ["torch==2.0.1+cu118", "numpy"]
+git = ["torch==2.0.1+cu118"]
+nerfacc = ["torch==2.0.1+cu118"]
+simple-knn = ["torch==2.0.1+cu118", "numpy"]
+tinycudann = ["torch==2.0.1+cu118"]
+
+[tool.uv.workspace]
+members = [
+    "diff-gaussian-rasterization",
+    "simple-knn",
+]
+
+[[tool.uv.index]]
+url = "https://download.pytorch.org/whl/cu118"
+
+[dependency-groups]
+dev = [
+  {include-group = "lint"},
+  {include-group = "test"}
+]
+lint = [
+  "ruff"
+]
+test = [
+  "pytest"
+]
