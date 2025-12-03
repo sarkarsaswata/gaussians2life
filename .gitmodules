@@ -3,10 +3,10 @@
 	url = https://github.com/JunyaoHu/common_metrics_on_video_quality.git
 [submodule "diff-gaussian-rasterization"]
 	path = diff-gaussian-rasterization
-	url = https://github.com/Zerg-Overmind/diff-gaussian-rasterization
+	url = https://github.com/sarkarsaswata/diff-gaussian-rasterization.git
 [submodule "simple-knn"]
 	path = simple-knn
-	url = https://github.com/DSaurus/simple-knn
+	url = https://github.com/sarkarsaswata/simple-knn.git
 [submodule "guidance/dynamicrafter"]
 	path = guidance/dynamicrafter
 	url = https://github.com/Doubiiu/DynamiCrafter
