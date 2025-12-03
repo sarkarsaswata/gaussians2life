@@ -72,7 +72,6 @@ packages = [
 
 [tool.uv.sources]
 diff-gaussian-rasterization = { workspace = true }
-
 simple-knn = { workspace = true }
 nerfacc = { git = "https://github.com/KAIR-BAIR/nerfacc.git", rev = "v0.5.2" }
 tinycudann = { git = "https://github.com/NVlabs/tiny-cuda-nn.git", subdirectory = "bindings/torch" }
@@ -81,10 +80,12 @@ nvdiffrast = { git = "https://github.com/NVlabs/nvdiffrast.git", rev = "729261dc
 
 [tool.uv.extra-build-dependencies]
 diff-gaussian-rasterization = ["torch==2.0.1+cu118", "numpy"]
-git = ["torch==2.0.1+cu118"]
 nerfacc = ["torch==2.0.1+cu118"]
 simple-knn = ["torch==2.0.1+cu118", "numpy"]
 tinycudann = ["torch==2.0.1+cu118"]
+
+[[tool.uv.index]]
+url = "https://download.pytorch.org/whl/cu118"
 
 [tool.uv.workspace]
 members = [
