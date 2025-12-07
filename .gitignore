@@ -12,4 +12,7 @@ __pycache__/
 # python version
 .python-version
 
+# ruff cache
+.ruff_cache/
+
 

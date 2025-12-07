@@ -1,146 +1,25 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel",
+    "torch",
+    "numpy",
+]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "gaussians2life"
 version = "0.1.0"
-description = "Text-Driven Animation of 3D Gaussian Splatting Scenes"
+description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10,<3.11"
 dependencies = [
-    "absl-py==2.3.1",
-    "accelerate==1.1.1",
-    "addict==2.4.0",
-    "aiofiles==23.2.1",
-    "av==13.1.0",
-    "bitsandbytes==0.38.1",
-    "controlnet-aux==0.0.7",
-    "dash==3.3.0",
-    "deepdiff==7.0.1",
-    "diff-gaussian-rasterization",
-    "diffusers==0.19.3",
-    "einops==0.8.0",
-    "envlight",
-    "gradio==4.11.0",
-    "huggingface-hub==0.24.7",
-    "imageio==2.36.0",
-    "imageio-ffmpeg==0.5.1",
-    "jaxtyping==0.2.34",
-    "kornia==0.7.4",
-    "libigl==2.5.1",
-    "lightning==2.0.0",
-    "lpips==0.1.4",
-    "markupsafe==2.1.5",
-    "matplotlib==3.9.2",
-    "nerfacc",
-    "networkx==3.4.2",
-    "ninja==1.13.0",
-    "numpy==1.26.4",
-    "nvdiffrast",
-    "nvidia-cublas-cu11==11.11.3.6; sys_platform == 'linux'",
-    "nvidia-cudnn-cu11==9.10.2.21; sys_platform == 'linux'",
-    "omegaconf==2.3.0",
-    "open-clip-torch==2.22.0",
-    "open3d==0.18.0",
-    "opencv-python==4.10.0.84",
-    "pandas==2.3.3",
-    "pip==25.3",
-    "plyfile==1.1",
-    "plotly==6.5.0",
-    "pymcubes==0.1.6",
-    "pysdf==0.1.9",
-    "pytest==9.0.1",
-    "pytorch-lightning==2.6.0",
-    "roma==1.5.1",
-    "ruff==0.14.7",
-    "safetensors==0.4.5",
-    "scikit-image==0.25.2",
-    "scikit-learn==1.7.2",
-    "scipy==1.15.3",
-    "sentencepiece==0.2.0",
-    "simple-knn",
-    "taming-transformers-rom1504==0.0.6",
-    "tensorboard==2.18.0",
-    "timm==0.9.16",
-    "tinycudann",
-    "torch==2.1.2; sys_platform == 'linux'",
-    "torchmetrics==1.6.0",
-    "torchvision==0.16.2; sys_platform == 'linux'",
-    "transformers==4.46.2",
-    "trimesh==4.5.2",
-    "triton==2.1.0; sys_platform == 'linux'",
-    "typeguard==2.13.3",
-    "wandb==0.18.7",
-    "wheel==0.45.1",
-    "xatlas==0.0.9",
-    "mediapipe>=0.10.11",
-    "ipython>=8.37.0",
-    "xformers>=0.0.22",
-    "fsspec>=2023.4.0,<=2025.9.0",
-    "requests==2.28.1",
-    "sympy>=1.11.1,<=1.14.0",
-    "tqdm==4.66.5",
-    "rich>=14.2.0",
-    "typer>=0.20.0",
-    "packaging>=24.0",
-    "setuptools>=70.0.0",
-    "lightning-utilities==0.11.8",
-    "huggingface-hub>=0.36.0",
-    "diffusers[torch]>=0.19.3",
-    "torchmetrics>=1.0.3",
+    "markupsafe",
+    "numpy",
+    "nvidia-cudnn-cu11",
+    "torch",
+    "torchvision",
 ]
 
-[build-system]
-requires = ["setuptools", "wheel", "numpy", "torch"]
-build-backend = "setuptools.build_meta"
-
-[tool.uv.extra-build-dependencies]
-nerfacc = ["numpy", "packaging", "setuptools", "torch", "wheel"]
-tinycudann = ["numpy", "packaging", "setuptools", "torch", "wheel"]
-diff-gaussian-rasterization = ["numpy", "setuptools", "torch", "wheel"]
-simple-knn = ["numpy", "setuptools", "torch", "wheel"]
-
-[tool.uv]
-environments = [
-    "sys_platform == 'linux' and platform_machine == 'x86_64'"
-]
-
-[[tool.uv.index]]
-name = "pytorch-cu118"
-url = "https://download.pytorch.org/whl/cu118"
-explicit = true
-
-[tool.setuptools.packages.find]
-where = ["."]
-
-[tool.uv.sources]
-torch = [
-  { index = "pytorch-cu118", marker = "sys_platform == 'linux'" },
-]
-torchvision = [
-  { index = "pytorch-cu118", marker = "sys_platform == 'linux'" },
-]
-numpy = [
-  { index = "pytorch-cu118", marker = "sys_platform == 'linux'" },
-]
-nerfacc = { git = "https://github.com/KAIR-BAIR/nerfacc.git", rev = "v0.5.2" }
-tinycudann = { git = "https://github.com/NVlabs/tiny-cuda-nn.git", subdirectory = "bindings/torch" }
-envlight = { git = "https://github.com/ashawkey/envlight.git", rev = "05b5851e854429d72ecaf5b206ed64ce55fae677" }
-nvdiffrast = { git = "https://github.com/NVlabs/nvdiffrast.git", rev = "729261dc64c4241ea36efda84fbf532cc8b425b8" }
-diff-gaussian-rasterization = { workspace = true }
-simple-knn = { workspace = true }
-
-[tool.uv.workspace]
-members = [
-    "diff-gaussian-rasterization",
-    "simple-knn",
-]
-
-[dependency-groups]
-dev = [
-  {include-group = "lint"},
-  {include-group = "test"}
-]
-lint = [
-  "ruff"
-]
-test = [
-  "pytest"
-]
+[tool.setuptools]
+packages = ["gaussians2life"]

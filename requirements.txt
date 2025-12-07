@@ -15,6 +15,7 @@ libigl==2.5.1
 lightning==2.0.0
 lpips==0.1.4
 matplotlib==3.9.2
+mediapipe
 networkx
 nvdiffrast @ git+https://github.com/NVlabs/nvdiffrast.git@729261dc64c4241ea36efda84fbf532cc8b425b8
 omegaconf==2.3.0
@@ -29,7 +30,7 @@ safetensors==0.4.5
 sentencepiece==0.2.0
 taming-transformers-rom1504==0.0.6
 tensorboard==2.18.0
-timm==0.9.16
+timm==0.9.2
 torchmetrics==1.6.0
 transformers==4.46.2
 trimesh==4.5.2
