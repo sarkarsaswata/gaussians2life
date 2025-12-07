@@ -1,0 +1,112 @@
+[build-system]
+requires = ["setuptools", "wheel", "numpy", "torch"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gaussians2life"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate==1.1.1",
+    "av==13.1.0",
+    "bitsandbytes==0.38.1",
+    "cmake>=3.25.0",
+    "controlnet-aux==0.0.7",
+    "diffusers==0.19.3",
+    "einops==0.8.0",
+    "envlight",
+    "gradio==4.11.0",
+    "huggingface-hub==0.24.7",
+    "imageio==2.36.0",
+    "imageio-ffmpeg==0.5.1",
+    "jaxtyping==0.2.34",
+    "kornia==0.7.4",
+    "libigl==2.5.1",
+    "lpips==0.1.4",
+    "markupsafe>=2.1.2,<2.1.5",
+    "matplotlib==3.9.2",
+    "nerfacc",
+    "networkx>=3.3",
+    "ninja>=1.13.0",
+    "numpy>=1.24.1,<=2.1.2",
+    "nvdiffrast",
+    "nvidia-cudnn-cu11>=9.10.2.21",
+    "omegaconf==2.3.0",
+    "open-clip-torch==2.22.0",
+    "open3d==0.18.0",
+    "opencv-python==4.10.0.84",
+    "packaging>=25.0",
+    "pip>=25.3",
+    "plyfile==1.1",
+    "pymcubes==0.1.6",
+    "pysdf==0.1.9",
+    "pytorch-lightning>=2.6.0",
+    "roma==1.5.1",
+    "safetensors==0.4.5",
+    "sentencepiece==0.2.0",
+    "setuptools<70.0.0",
+    "taming-transformers-rom1504==0.0.6",
+    "tensorboard==2.18.0",
+    "threestudio",
+    "timm==0.9.2",
+    "tinycudann",
+    "torch>=2.1.2",
+    "torchmetrics>=1.8.2",
+    "torchvision>=0.16.2",
+    "transformers==4.46.2",
+    "trimesh==4.5.2",
+    "typeguard==2.13.3",
+    "wandb==0.18.7",
+    "xatlas==0.0.9",
+    "xformers>=0.0.22.post3,<=0.0.27.post2",
+]
+
+[dependency-groups]
+dev = [
+    "deptry>=0.24.0",
+    "pytest>=9.0.1",
+]
+lint = [
+    "ruff>=0.14.8",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.deptry]
+ignore = ["DEP002", "DEP003"]
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
+
+[tool.uv]
+index-strategy = "unsafe-best-match"
+environments = [
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
+[tool.uv.workspace]
+members = [
+    "diff-gaussian-rasterization",
+    "simple-knn",
+]
+
+[tool.uv.extra-build-dependencies]
+diff-gaussian-rasterization = ["torch"]
+nerfacc = ["torch"]
+simple-knn = ["torch"]
+tinycudann = ["torch"]
+
+[tool.uv.sources]
+threestudio = { path = "../..", editable = true }
+diff-gaussian-rasterization = { workspace = true }
+envlight = { git = "https://github.com/ashawkey/envlight.git", rev = "05b5851e854429d72ecaf5b206ed64ce55fae677" }
+nerfacc = { git = "https://github.com/nerfstudio-project/nerfacc.git", rev = "v0.5.2" }
+nvdiffrast = { git = "https://github.com/NVlabs/nvdiffrast.git", rev = "729261dc64c4241ea36efda84fbf532cc8b425b8" }
+simple-knn = { workspace = true }
+tinycudann = { git = "https://github.com/NVlabs/tiny-cuda-nn.git", subdirectory = "bindings/torch" }
+torch = { index = "pytorch-cu118" }
