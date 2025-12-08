@@ -7,6 +7,7 @@ diffusers==0.19.3
 einops==0.8.0
 envlight @ git+https://github.com/ashawkey/envlight.git@05b5851e854429d72ecaf5b206ed64ce55fae677
 gradio==4.11.0
+h5py>=3.10.0
 huggingface-hub==0.24.7
 imageio==2.36.0
 imageio-ffmpeg==0.5.1
@@ -24,11 +25,14 @@ open-clip-torch==2.22.0
 open3d==0.18.0
 opencv-python==4.10.0.84
 plyfile==1.1
+protobuf>=4.25.3
 PyMCubes==0.1.6
 pysdf==0.1.9
 roma==1.5.1
 safetensors==0.4.5
 sentencepiece==0.2.0
+tables
+tabulate
 taming-transformers-rom1504==0.0.6
 tensorboard==2.18.0
 timm==0.9.2

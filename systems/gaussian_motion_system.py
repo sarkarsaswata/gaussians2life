@@ -96,6 +96,9 @@ class GaussTo4D(BaseLift3DSystem):
                 [render_out_i[k] if not isinstance(render_out_i[k], list) else render_out_i[k][0][None] for
                  render_out_i in render_outs]
             )
+        
+        # Clear memory after concatenation
+        torch.cuda.empty_cache()
 
         # add intrinsics and extrinsics to out
         out["intrinsics"] = build_intrinsics(batch["fovx"][0], batch["fovy"][0], batch["width"], batch["height"])

@@ -52,6 +52,48 @@ pip install -r requirements.txt
 pip install ./diff-gaussian-rasterization
 pip install ./simple-knn
 ```
+### My version
+```bash
+# inside the container `~/threestudio`
+$ uv venv
+$ source .venv/bin/activate
+$ uv pip install torch torchvision nvidia-cudnn-cu11 "markupsafe>=2.1.2,<=2.1.5" xformers --index-url https://download.pytorch.org/whl/cu118
+$ uv pip install --upgrade pip setuptools ninja
+$ uv pip install 'nerfacc @git+https://github.com/nerfstudio-project/nerfacc.git@v0.5.2' --no-build-isolation
+$ uv pip install 'tinycudann @git+https://github.com/NVlabs/tiny-cuda-nn.git#subdirectory=bindings/torch' --no-build-isolation
+$ cd custom/gaussians2life
+$ uv pip install -r requirements.txt --no-build-isolation
+$ uv pip install ./diff-gaussian-rasterization --no-build-isolation
+$ uv pip install ./simple-knn --no-build-isolation
+$ cd ../..
+```
+
+else run [create_venv.sh](/home/saswata/create_venv.sh)
+
+```sh
+#!/bin/bash
+
+# Create and activate virtual environment
+uv venv
+source .venv/bin/activate
+
+# Install necessary packages
+uv pip install torch torchvision nvidia-cudnn-cu11 "markupsafe>=2.1.2,<=2.1.5" xformers --index-url https://download.pytorch.org/whl/cu118
+uv pip install --upgrade pip setuptools ninja
+uv pip install 'nerfacc @git+https://github.com/nerfstudio-project/nerfacc.git@v0.5.2' --no-build-isolation
+uv pip install 'tinycudann @git+https://github.com/NVlabs/tiny-cuda-nn.git#subdirectory=bindings/torch' --no-build-isolation
+
+# Navigate to the project directory and install additional requirements
+cd custom/gaussians2life
+uv pip install -r requirements.txt --no-build-isolation
+uv pip install ./diff-gaussian-rasterization --no-build-isolation
+uv pip install ./simple-knn --no-build-isolation
+
+# Return to the original directory
+cd ../..
+```
+
+---
 
 ### Download of pretrained DynamiCrafter model
 

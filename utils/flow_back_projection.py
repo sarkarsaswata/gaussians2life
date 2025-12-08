@@ -134,9 +134,24 @@ class FlowBackProjection:
         :param video: tensor of shape (T, 3, H, W) with values in [0, 255]
         :return: tuple of tensors (pred_depth, pred_depth_confidence) with shapes (T, H, W) and (T, H, W)
         """
+        depths = []
+        confidences = []
         with torch.no_grad():
-            output = self.depth_model.infer(video, self.camera_intrinsics[None].repeat(video.size(0), 1, 1))
-        return output["depth"].squeeze(1), output["confidence"].squeeze(1)
+            # Process each frame individually to avoid shape mismatch issues
+            for i in range(video.size(0)):
+                frame = video[i:i+1]  # Keep batch dimension (1, 3, H, W)
+                output = self.depth_model.infer(frame, self.camera_intrinsics[None])
+                # Move to CPU immediately to free GPU memory
+                depths.append(output["depth"].cpu())
+                confidences.append(output["confidence"].cpu())
+                # Clear cache after each frame to prevent memory buildup
+                if i < video.size(0) - 1:  # Don't clear on last iteration
+                    torch.cuda.empty_cache()
+        
+        # Concatenate results and remove extra dimensions, then move back to GPU
+        depth = torch.cat(depths, dim=0).squeeze(1).to(self.device)  # (T, H, W)
+        confidence = torch.cat(confidences, dim=0).squeeze(1).to(self.device)  # (T, H, W)
+        return depth, confidence
 
     def get_point_tracks(self, video, timestep=0, **kwargs):
         """
@@ -245,5 +260,9 @@ class FlowBackProjection:
         depth_points = depths_per_point.unsqueeze(2)  # T N 1
         points_3d = torch.cat((angles_points, depth_points), dim=2)  # T N 3
         points_3d = spherical_zbuffer_to_euclidean(points_3d)  # T N 3
+
+        # Clear intermediate tensors from GPU memory
+        del depth, confidence, pred_depths_per_point, angles, angles_points, depth_points
+        torch.cuda.empty_cache()
 
         return points_3d, depth_confidence_per_point
